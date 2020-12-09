@@ -1,10 +1,10 @@
 import React from "react";
-import { InputTag } from "./InputTag";
+import { InputTagContainer } from "../containers/InputTagContainer";
 
 function App() {
   return (
     <div className="App">
-      <InputTag />
+      <InputTagContainer />
     </div>
   );
 }
