@@ -5,14 +5,15 @@ import styled from "styled-components";
 const InputBox = styled.div`
   margin: 0;
   padding: 0;
-  width: 100%;
+  width: 80%;
   height: 60px;
   border: 1px solid #000000;
   white-space: nowrap;
   overflow: auto;
+  float: left;
 `;
 const Input = styled.input`
-  width: 600px;
+  width: 100%;
   height: 100%;
   border: 0;
   -webkit-appearance: none;
@@ -42,6 +43,14 @@ const Xbutton = styled.button`
   border: 0;
   background: none;
 `;
+const ConfirmButton = styled.button`
+  margin: auto;
+  margin-right: 0;
+  width: 10%;
+  height: 60px;
+  background: none;
+  border: 0;
+`;
 
 export function InputTag(props: any) {
   const state = useSelector((state: any) => state.tagState.state);
@@ -67,18 +76,21 @@ export function InputTag(props: any) {
       );
   }
   return (
-    <InputBox>
-      <TagBox>{tagArray}</TagBox>
-      <Input
-        placeholder="태그를 추가해주세요"
-        value={state.value}
-        onChange={e => props.value(e.target.value)}
-        onKeyPress={e => {
-          if (e.key === " ") {
-            enterFunc();
-          }
-        }}
-      />
-    </InputBox>
+    <div>
+      <InputBox>
+        <TagBox>{tagArray}</TagBox>
+        <Input
+          placeholder="태그를 추가해주세요"
+          value={state.value}
+          onChange={e => props.value(e.target.value)}
+          onKeyPress={e => {
+            if (e.key === " ") {
+              enterFunc();
+            }
+          }}
+        />
+      </InputBox>
+      <ConfirmButton>확인</ConfirmButton>
+    </div>
   );
 }
