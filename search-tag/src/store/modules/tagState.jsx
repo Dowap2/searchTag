@@ -8,8 +8,8 @@ export const ChangeValue = createAction(VALUE);
 
 const initialState = {
   state: {
-    tag: ["text"],
-    value: ""
+    tag: [],
+    value: null
   }
 };
 
