@@ -23,62 +23,74 @@ const Input = styled.input`
   background: none;
 `;
 const Tag = styled.div`
-  height: 30px;
-  border: 1px solid #000000;
+  margin: auto;
+  margin: 3px;
   float: left;
-  border-radius: 20px;
+  border-radius: 5px;
+  background: rgba(245, 93, 0, 0.2);
 `;
-const TagBox = styled.div``;
+const TagBox = styled.div`
+  margin: 5px;
+`;
 const TagName = styled.div`
-  margin: 10px;
-  text-align: center;
-  line-height: 20px;
+  font-size: 14px;
+  margin: auto;
   float: left;
 `;
 const Xbutton = styled.button`
   width: 10px;
   height: 10px;
-  margin: 10px;
-  text-align: center;
   border: 0;
   background: none;
 `;
 const ConfirmButton = styled.button`
-  margin: auto;
+  margin: 3px;
   margin-right: 0;
   width: 10%;
   height: 60px;
-  background: none;
+  background: rgba(245, 93, 0, 0.2);
   border: 0;
+  border-radius: 5px;
 `;
 
 export function InputTag(props: any) {
   const state = useSelector((state: any) => state.tagState.state);
   const tagArray: Array<any> = [];
+
   function enterFunc() {
     props.value(state.value.trim());
     const str: string = state.value.replace(/ /gi, "_");
     props.tag(state.tag.concat([str]));
     props.value("");
   }
+
   function deleteButtonClick(index: number) {
     const tagArrayCopy: Array<string> = state.tag;
     tagArrayCopy.splice(index, 1);
     props.tag(tagArrayCopy);
   }
+
+  function confirmButtonClick() {
+    props.searched(state.searched.concat(state.tag));
+    props.tag([]);
+    props.value("");
+  }
+
   for (let index = 0; index < state.tag.length; index++) {
     if (state.tag[index] !== "" && state.tag[index] !== " ")
       tagArray[index] = (
         <Tag>
-          <TagName>{state.tag[index]}</TagName>
-          <Xbutton onClick={e => deleteButtonClick(index)}>x</Xbutton>
+          <TagBox>
+            <TagName>{state.tag[index]}</TagName>
+            <Xbutton onClick={e => deleteButtonClick(index)}>x</Xbutton>
+          </TagBox>
         </Tag>
       );
   }
   return (
     <div>
       <InputBox>
-        <TagBox>{tagArray}</TagBox>
+        <div>{tagArray}</div>
         <Input
           placeholder="태그를 추가해주세요"
           value={state.value}
@@ -90,7 +102,7 @@ export function InputTag(props: any) {
           }}
         />
       </InputBox>
-      <ConfirmButton>확인</ConfirmButton>
+      <ConfirmButton onClick={e => confirmButtonClick()}>확인</ConfirmButton>
     </div>
   );
 }
