@@ -58,9 +58,12 @@ export function InputTag(props: any) {
   const tagArray: Array<any> = [];
 
   function enterFunc() {
-    props.value(state.value.trim());
-    const str: string = state.value.replace(/ /gi, "_");
-    props.tag(state.tag.concat([str]));
+    if (state.value !== " " && state.value !== null) {
+      props.value(state.value.trim());
+      const str: string = state.value.replace(/ /gi, "_");
+      props.tag(state.tag.concat([str]));
+      props.value("");
+    }
     props.value("");
   }
 

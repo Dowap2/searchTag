@@ -25,19 +25,21 @@ export function AlreadySearchedTagComponent(props: any) {
   const tag = useSelector((state: any) => state.tagState.state.tag);
   const searchedArray: Array<any> = [];
   for (let index = 0; index < searchedItem.length; index++) {
-    searchedArray[index] = (
-      <Tag onClick={e => props.tag(tag.concat(searchedItem[index]))}>
-        <TagBox>
-          <TagName>{searchedItem[index]}</TagName>
-        </TagBox>
-      </Tag>
-    );
+    if (searchedItem[index] !== "" && searchedItem !== " ") {
+      searchedArray[index] = (
+        <Tag onClick={e => props.tag(tag.concat(searchedItem[index]))}>
+          <TagBox>
+            <TagName>{searchedItem[index]}</TagName>
+          </TagBox>
+        </Tag>
+      );
+    }
   }
   return (
     <div>
       검색 내역
-      {searchedArray}
-      <button onClick={e => console.log(searchedItem)}></button>
+      <div>{searchedArray}</div>
+      <button onClick={e => console.log(searchedArray)}></button>
     </div>
   );
 }
