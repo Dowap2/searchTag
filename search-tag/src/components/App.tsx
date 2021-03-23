@@ -1,12 +1,12 @@
 import React from "react";
-import { InputTagContainer } from "../containers/InputTagContainer";
-import { AlreadySearchedTagContainer } from "../containers/AlreadySearchedTagContainer";
+import { TagComponent } from "../components/TagComponents";
+import { BoxComponent } from "../ui/BoxComponent";
 
 function App() {
+  console.log("dsfd");
   return (
-    <div className="App">
-      <InputTagContainer />
-      <AlreadySearchedTagContainer />
+    <div>
+      <TagComponent />
     </div>
   );
 }
